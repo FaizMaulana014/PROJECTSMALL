@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Menabung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f2f2f2; /* Background warna solid */
+            background-image: url('https://i.ibb.co.com/sCLs3CQ/Whats-App-Image-2024-06-04-at-22-27-51.jpg'); /* URL gambar background */
+            background-size: cover; /* Mengatur ukuran gambar */
+            background-position: center; /* Mengatur posisi gambar */
+            background-repeat: no-repeat; /* Mengatur agar gambar tidak diulang */
+            background-attachment: fixed; /* Membuat background tetap di tempat */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Background warna putih dengan transparansi */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input[type="number"], input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .total {
+            text-align: center;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .savings-list {
+            margin-top: 20px;
+        }
+        .savings-item {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .savings-item span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Formulir Menabung</h1>
+    <form id="savingForm">
+        <label for="amount">Masukkan Jumlah Uang:</label>
+        <input type="number" id="amount" name="amount" required min="0">
+        <input type="submit" value="Tabung">
+    </form>
+    <div class="total" id="totalSavings">
+        Total Tabungan: Rp 0
+    </div>
+    <div class="savings-list" id="savingsList">
+    </div>
+</div>
+
+<script>
+    let totalSavings = 0;
+
+    document.getElementById('savingForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let amount = parseInt(document.getElementById('amount').value);
+        if (!isNaN(amount) && amount > 0) {
+            totalSavings += amount;
+            document.getElementById('totalSavings').innerText = 'Total Tabungan: Rp ' + totalSavings;
+
+            let currentDate = new Date();
+            let dateString = currentDate.toLocaleDateString() + ' ' + currentDate.toLocaleTimeString();
+
+            let savingsList = document.getElementById('savingsList');
+            let newItem = document.createElement('div');
+            newItem.className = 'savings-item';
+            newItem.innerHTML = `<span>Jumlah: Rp ${amount}</span><span>Tanggal: ${dateString}</span>`;
+            savingsList.appendChild(newItem);
+
+            document.getElementById('amount').value = '';
+        }
+    });
+</script>
+
+</body>
+</html>
